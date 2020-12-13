@@ -4,6 +4,7 @@ function ReminderDetail() {
   return (
     <section>
       <div>This is ReminderDetail.</div>
+      <div>components</div>
     </section>
   )
 }
