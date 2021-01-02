@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { makeStyles, TextField } from '@material-ui/core'
+import { FormControl, FormControlLabel, makeStyles, TextField } from '@material-ui/core'
+
+import Checkbox from '@material-ui/core/Checkbox';
+import CircleChecked from '@material-ui/icons/CheckCircleOutline';
+import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
+import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
 
 
 // material-ui styles
@@ -23,6 +28,9 @@ const materialStyles = makeStyles((theme) => ({
   },
   listButton: {
     color: "#1b7de9"
+  },
+  checkboxStyle: {
+    color: "#eaeaea"
   }
 }))
 
@@ -38,6 +46,9 @@ const titleWrapperStyles = {
   fontWeight: "bold",
   color: "#FFE400"
 }
+const checkboxLabelStyles = {
+  color: '#eaeaea'
+}
 
 
 
@@ -47,7 +58,7 @@ function ReminderDetail() {
 
   return (
     <section>
-      <div>
+      <div className="top">
         {/* header 영역 */}
         <div id="headerWrapper" style={headerWrapperStyles}>
         <AppBar position="static" className={materialClasses.appBarStyle}>
@@ -64,14 +75,34 @@ function ReminderDetail() {
           </Toolbar>
         </AppBar>
         </div>
-        {/* title 영역 */}
+        {/* title 영역 */} 
         <div id="titleWrapper" style={titleWrapperStyles}>미리알림 제목</div>
       </div>
-      <form noValidate autoComplete="off">
-        {/* <TextField  id="headerTextField"
-                    className={styleClasses.headerTextField}
-                    label="미리알림 제목" /> */}
-      </form>
+      <div className="middle">
+        <form noValidate autoComplete="off">
+          <div className="rowWrapper">
+            <div className="row">
+              <Checkbox
+                id="chk0"
+                icon={<CircleUnchecked />}
+                checkedIcon={<CircleCheckedFilled />}
+                className={materialClasses.checkboxStyle}
+
+              />
+              <label for="chk0" style={checkboxLabelStyles}>밀레니얼 슈퍼리치 도서</label>
+            </div>
+            <div className="row">
+              <Checkbox
+                id="chk1"
+                icon={<CircleUnchecked />}
+                checkedIcon={<CircleChecked />}
+                className={materialClasses.checkboxStyle}
+              />
+              <label for="chk1" style={checkboxLabelStyles}>마사지건</label>
+            </div>
+          </div>
+        </form>
+      </div>
     </section>
   )
 }
