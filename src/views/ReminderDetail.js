@@ -30,7 +30,8 @@ const materialStyles = makeStyles((theme) => ({
     color: "#1b7de9"
   },
   checkboxStyle: {
-    color: "#eaeaea"
+    color: "#eaeaea",
+    paddingLeft: "19px"
   }
 }))
 
@@ -49,6 +50,18 @@ const titleWrapperStyles = {
 const checkboxLabelStyles = {
   color: '#eaeaea'
 }
+const rowStyles = {
+  paddingTop: "11px",
+  borderBottom: "1px solid #353535",
+}
+const bottomStyles = {
+  position: "absolute",
+  // left: "25%",
+  bottom: "0",
+  height: "7%",
+  width: "100%",
+  border: "1px solid magenta"
+}
 
 
 
@@ -58,6 +71,7 @@ function ReminderDetail() {
 
   return (
     <section>
+      {/* top */}
       <div className="top">
         {/* header 영역 */}
         <div id="headerWrapper" style={headerWrapperStyles}>
@@ -78,28 +92,33 @@ function ReminderDetail() {
         {/* title 영역 */} 
         <div id="titleWrapper" style={titleWrapperStyles}>미리알림 제목</div>
       </div>
+      {/* middle */}
       <div className="middle">
         <form noValidate autoComplete="off">
           <div className="rowWrapper">
-            <div className="row">
+            {/* TODO : loop */}
+            <div className="row" style={rowStyles}>
               <Checkbox
                 id="chk0"
                 icon={<CircleUnchecked />}
-                checkedIcon={<CircleCheckedFilled />}
+                checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
                 className={materialClasses.checkboxStyle}
-
               />
               <label for="chk0" style={checkboxLabelStyles}>밀레니얼 슈퍼리치 도서</label>
             </div>
-            <div className="row">
+            <div className="row" style={rowStyles}>
               <Checkbox
                 id="chk1"
                 icon={<CircleUnchecked />}
-                checkedIcon={<CircleChecked />}
+                checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
                 className={materialClasses.checkboxStyle}
               />
               <label for="chk1" style={checkboxLabelStyles}>마사지건</label>
             </div>
+          </div>
+          {/* bottom */}
+          <div className="bottom" style={bottomStyles}>
+            {/* TODO: 새로운 미리 알림 버튼 */}
           </div>
         </form>
       </div>
