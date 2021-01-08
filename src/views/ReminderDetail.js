@@ -5,7 +5,9 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { FormControl, FormControlLabel, makeStyles, TextField } from '@material-ui/core'
+import { FormControl, FormControlLabel, makeStyles } from '@material-ui/core'
+// import { FormControl, FormControlLabel, makeStyles, TextField } from '@material-ui/core'
+import AddCircleIcon from '@material-ui/icons/AddCircle'
 
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleChecked from '@material-ui/icons/CheckCircleOutline';
@@ -19,19 +21,34 @@ const materialStyles = makeStyles((theme) => ({
     backgroundColor: "#000000"
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-    color: "#1b7de9"
+    // marginRight: theme.spacing(2),
+    color: "#0e82f9",
+    float : "left",
+    paddingLeft: "2px",
+    paddingRight: "0px"
   },
   title: {
     flexGrow: 1,
-    color: "#1b7de9"
+    color: "#0e82f9",
+    fontSize: "1.0em"
   },
   listButton: {
-    color: "#1b7de9"
+    color: "#0e82f9"
   },
   checkboxStyle: {
-    color: "#eaeaea",
+    color: "#cacaca",
     paddingLeft: "19px"
+  },
+  addCircleIconStyle: {
+    color: "#e9b901",
+    fontSize: "2.1em",
+    fontWeight: "bold",
+    marginTop: "9px",
+    marginLeft: "9px"
+  },
+  //test
+  arrowIconStyle: {
+    marginRight: "0"
   }
 }))
 
@@ -41,14 +58,13 @@ const headerWrapperStyles = {
   padding: "0 5px 0 5px",
 }
 const titleWrapperStyles = {
-  // border: "1px solid",
   padding: "1px 15px 1px 15px",
-  fontSize: "2.3em",
+  fontSize: "2.15em",
   fontWeight: "bold",
-  color: "#FFE400"
+  color: "#e9b901"
 }
 const checkboxLabelStyles = {
-  color: '#eaeaea'
+  color: '#cacaca'
 }
 const rowStyles = {
   paddingTop: "11px",
@@ -56,18 +72,21 @@ const rowStyles = {
 }
 const bottomStyles = {
   position: "absolute",
-  // left: "25%",
   bottom: "0",
   height: "7%",
   width: "100%",
-  border: "1px solid magenta"
+}
+const addButtonLabelStyles = {
+  color: "#e9b901",
+  float: "right",
+  marginRight: "240px",
+  marginTop: "14px"
 }
 
 
 
 function ReminderDetail() {
   const materialClasses = materialStyles()
-
 
   return (
     <section>
@@ -119,6 +138,8 @@ function ReminderDetail() {
           {/* bottom */}
           <div className="bottom" style={bottomStyles}>
             {/* TODO: 새로운 미리 알림 버튼 */}
+            <AddCircleIcon className={materialClasses.addCircleIconStyle} />
+            <label style={addButtonLabelStyles}>새로운 미리 알림</label>
           </div>
         </form>
       </div>
