@@ -8,9 +8,9 @@ function App() {
   return (
     <HashRouter>
       {/* 메인보드 화면 */}
-      <Route path="/" exact="true" component={MainBoard}></Route>
+      <Route path="/" exact component={MainBoard}></Route>
       {/* 미리알림 상세 화면 */}
-      <Route path="/detail" exact="true" component={ReminderDetail}></Route>
+      <Route path="/detail" exact={true} component={ReminderDetail}></Route>
     </HashRouter>
   )
   /* return (
