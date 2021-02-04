@@ -79,6 +79,14 @@ const addButtonLabelStyles = {
 }
 
 
+// 새로운 미리 알림 클릭 이벤트
+function fnAddNewItem() {
+  console.log('fnAddNewItem')
+
+  // TODO: 
+  
+}
+
 
 function ReminderDetail() {
   const materialClasses = materialStyles()
@@ -159,7 +167,7 @@ function ReminderDetail() {
             </div>
           </div>
           {/* bottom */}
-          <div className="bottom" style={bottomStyles}>
+          <div className="bottom" style={bottomStyles} onClick={fnAddNewItem}>
             {/* TODO: 새로운 미리 알림 버튼 */}
             <AddCircleIcon className={materialClasses.addCircleIconStyle} />
             <label style={addButtonLabelStyles}>새로운 미리 알림</label>

@@ -1,7 +1,8 @@
 import React from 'react'
 import { HashRouter, Route } from 'react-router-dom'
 import MainBoard from './views/MainBoard'
-import ReminderDetail from './views/ReminderDetail'
+// import ReminderDetail from './views/ReminderDetail'
+import ReminderDetailClass from './views/ReminderDetailClass'
 import './App.css';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
       {/* 메인보드 화면 */}
       <Route path="/" exact component={MainBoard}></Route>
       {/* 미리알림 상세 화면 */}
-      <Route path="/detail" exact={true} component={ReminderDetail}></Route>
+      <Route path="/detail" exact={true} component={ReminderDetailClass}></Route>
     </HashRouter>
   )
   /* return (
