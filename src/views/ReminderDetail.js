@@ -88,6 +88,9 @@ function fnAddNewItem() {
 }
 
 
+/**
+ * React 함수형
+ */
 function ReminderDetail() {
   const materialClasses = materialStyles()
 

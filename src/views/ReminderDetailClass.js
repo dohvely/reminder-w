@@ -1,28 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-// import { makeStyles } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-// import { FormControl, FormControlLabel, makeStyles } from '@material-ui/core'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleChecked from '@material-ui/icons/CheckCircleOutline';
-// import CircleCheckedFilled from '@material-ui/icons/CheckCircle';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
-import reminderDetailStyles from '../assets/css/reminder-detail.css';
 
 
 
-
-// material-ui styles
-const materialClasses = theme => ({
+const styleClasses = theme => ({
   appBarStyle: {
     backgroundColor: "#000000"
   },
@@ -52,15 +44,47 @@ const materialClasses = theme => ({
     marginTop: "9px",
     marginLeft: "9px"
   },
+  headerWrapperStyles: {
+    border: "1px solid",
+    padding: "0 5px 0 5px"
+  },
+  titleWrapperStyles: {
+    padding: "1px 15px 1px 15px",
+    fontSize: "2.15em",
+    fontWeight: "bold",
+    color: "#e9b901"
+  },
+  checkboxLabelStyles: {
+    color: '#cacaca'
+  },
+  rowStyles: {
+    paddingTop: "11px",
+    borderBottom: "1px solid #353535"
+  },
+  bottomStyles: {
+    position: "absolute",
+    bottom: "0",
+    height: "7%",
+    width: "100%"
+  },
+  addButtonLabelStyles: {
+    color: "#e9b901",
+    float: "right",
+    marginRight: "240px",
+    marginTop: "14px"
+  }
 })
-// const materialClasses = materialStyles()
 
 
+/**
+ * React 클래스형
+ */
 class ReminderDetailClass extends React.Component {
 
   // TOOD: 
   state = {
-    whatever: ''
+    reminderTitle: '사야할 것들',
+    reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' }]
   }
 
   componentDidMount() {
@@ -68,23 +92,26 @@ class ReminderDetailClass extends React.Component {
   }
 
   render() {
-    const {whatever} = this.state
+    const { reminderTitle, reminderList } = this.state
     const {classes} =this.props
+
+
+    //test
+    console.log('list:::'+JSON.stringify(reminderList))
+
 
 
     return <section>
     {/* top */}
     <div className="top">
       {/* header 영역 */}
-      <div id="headerWrapper" className={reminderDetailStyles.headerWrapperStyles}>
+      <div id="headerWrapper" className={classes.headerWrapperStyles}>
       <AppBar position="static" className={classes.appBarStyle}>
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <ArrowBackIosIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            목록
-          </Typography>
+          <Typography variant="h6" className={classes.title}>목록</Typography>
           <SvgIcon className={classes.listButton}>
             <metadata>
               <sfw  xmlns="&ns_sfw;">
@@ -120,37 +147,37 @@ class ReminderDetailClass extends React.Component {
       </AppBar>
       </div>
       {/* title 영역 */} 
-      <div id="titleWrapper" className={reminderDetailStyles.titleWrapperStyles}>미리알림 제목</div>
+      <div id="titleWrapper" className={classes.titleWrapperStyles}>{reminderTitle}</div>
     </div>
     {/* middle */}
     <div className="middle">
       <form noValidate autoComplete="off">
         <div className="rowWrapper">
           {/* TODO : loop */}
-          <div className="row" className={reminderDetailStyles.rowStyles}>
+          <div className="row" className={classes.rowStyles}>
             <Checkbox
               id="chk0"
               icon={<CircleUnchecked />}
               checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
               className={classes.checkboxStyle}
             />
-            <label htmlFor="chk0" className={reminderDetailStyles.checkboxLabelStyles}>밀레니얼 슈퍼리치 도서</label>
+            <label htmlFor="chk0" className={classes.checkboxLabelStyles}>밀레니얼 슈퍼리치 도서</label>
           </div>
-          <div className="row" className={reminderDetailStyles.rowStyles}>
+          <div className="row" className={classes.rowStyles}>
             <Checkbox
               id="chk1"
               icon={<CircleUnchecked />}
               checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
               className={classes.checkboxStyle}
             />
-            <label htmlFor="chk1" className={reminderDetailStyles.checkboxLabelStyles}>마사지건</label>
+            <label htmlFor="chk1" className={classes.checkboxLabelStyles}>마사지건</label>
           </div>
         </div>
         {/* bottom */}
-        <div className="bottom" className={reminderDetailStyles.bottomStyles}>
+        <div className="bottom" className={classes.bottomStyles}>
           {/* TODO: 새로운 미리 알림 버튼 */}
           <AddCircleIcon className={classes.addCircleIconStyle} />
-          <label className={reminderDetailStyles.addButtonLabelStyles}>새로운 미리 알림</label>
+          <label className={classes.addButtonLabelStyles}>새로운 미리 알림</label>
         </div>
       </form>
     </div>
@@ -163,4 +190,4 @@ ReminderDetailClass.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(materialClasses)(ReminderDetailClass)
+export default withStyles(styleClasses)(ReminderDetailClass)
