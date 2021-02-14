@@ -81,22 +81,26 @@ const styleClasses = theme => ({
  */
 class ReminderDetailClass extends React.Component {
 
-  // TOOD: LocalStorage
-  state = {
-    reminderTitle: '사야할 것들',
-    reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]
-  }
+  constructor(props) {
 
-  componentDidMount() {
-    localStorage.setItem('reminderList', JSON.stringify([{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]))
+    //test
+    console.log('constructor:::')
 
-    console.log('componentDidMount:::'+localStorage.getItem('reminderList'))
+    super(props)
+
+    // TOOD: LocalStorage
+    this.state = {
+      reminderTitle: '사야할 것들',
+      reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: false, text: '애플펜슬 2세대' }]
+    }
   }
 
   render() {
+    //test
+    console.log('render:::')
+
     const { reminderTitle, reminderList } = this.state
     const {classes} =this.props
-
 
     return <section>
     {/* top */}
@@ -174,6 +178,35 @@ class ReminderDetailClass extends React.Component {
       </form>
     </div>
   </section>
+  }
+
+  // "Mounting은 Lifecyle이 종료될 때까지 한 번만 일어납니다."
+  componentDidMount() {
+    /** componentDidMount: 컴포넌트가 화면에 모두 그려진 이후 호출. 첫 렌더링 이후 실행 */
+
+    //test
+    console.log('componentDidMount:::')
+
+    
+    //test
+    // let that = this
+    setTimeout(function(){
+      this.setState({reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]})
+    }.bind(this), 2000)
+    
+
+    // localStorage.setItem('reminderList', JSON.stringify([{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]))
+
+  }
+
+  componentDidUpdate() {
+    //test
+    console.log('componentDidUpdate:::')
+  }
+
+  componentWillUnmount() {
+    //test
+    console.log('componentWillUnmount:::')
   }
 
 }
