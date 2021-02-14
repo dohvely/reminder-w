@@ -81,24 +81,21 @@ const styleClasses = theme => ({
  */
 class ReminderDetailClass extends React.Component {
 
-  // TOOD: 
+  // TOOD: LocalStorage
   state = {
     reminderTitle: '사야할 것들',
-    reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' }]
+    reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]
   }
 
   componentDidMount() {
-    console.log('componentDidMount:::')
+    localStorage.setItem('reminderList', JSON.stringify([{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]))
+
+    console.log('componentDidMount:::'+localStorage.getItem('reminderList'))
   }
 
   render() {
     const { reminderTitle, reminderList } = this.state
     const {classes} =this.props
-
-
-    //test
-    console.log('list:::'+JSON.stringify(reminderList))
-
 
 
     return <section>
@@ -153,25 +150,20 @@ class ReminderDetailClass extends React.Component {
     <div className="middle">
       <form noValidate autoComplete="off">
         <div className="rowWrapper">
-          {/* TODO : loop */}
-          <div className="row" className={classes.rowStyles}>
-            <Checkbox
-              id="chk0"
-              icon={<CircleUnchecked />}
-              checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
-              className={classes.checkboxStyle}
-            />
-            <label htmlFor="chk0" className={classes.checkboxLabelStyles}>밀레니얼 슈퍼리치 도서</label>
-          </div>
-          <div className="row" className={classes.rowStyles}>
-            <Checkbox
-              id="chk1"
-              icon={<CircleUnchecked />}
-              checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
-              className={classes.checkboxStyle}
-            />
-            <label htmlFor="chk1" className={classes.checkboxLabelStyles}>마사지건</label>
-          </div>
+          {/* start: 미리알림 목록 loop */}
+          {reminderList.map((item, index) => {
+            return <div className="row" className={classes.rowStyles} key={index}>
+                <Checkbox
+                  id="chk0"
+                  icon={<CircleUnchecked />}
+                  checkedIcon={<CircleChecked style={{ color: "#eaeaea" }} />}
+                  className={classes.checkboxStyle}
+                  checked={item.checked}
+                />
+                <label htmlFor="chk0" className={classes.checkboxLabelStyles}>{item.text}</label>
+              </div>
+          })}
+          {/* end: 미리알림 목록 loop */}
         </div>
         {/* bottom */}
         <div className="bottom" className={classes.bottomStyles}>
