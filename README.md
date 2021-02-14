@@ -1,12 +1,19 @@
-# Getting Started with Create React App
+# 미리알림 웹 클론 코딩
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+iOS 기본 탑재된 미리알림 앱을 웹버전으로 구현한다.
 
-## Available Scripts
+## Purpose
 
-In the project directory, you can run:
+React를 학습하고, 좋은 스터디 자료가 될 수 있는 스토리를 남긴다.
 
-### `yarn start`
+### FE 기술
+Javascript, React, LocalStorage
+
+### UI components
+Material UI
+
+<!-- sample -->
+<!-- ### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -67,4 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
