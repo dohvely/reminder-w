@@ -92,7 +92,7 @@ class ReminderDetailClass extends React.Component {
     // localStorage.setItem('reminderList', JSON.stringify([{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: false, text: '애플워치' },{ checked: true, text: '애플펜슬 2세대' }]))
 
     let reminderListString = localStorage.getItem('reminderList')
-    let reminderList = JSON.parse(reminderListString)
+    let reminderList = reminderListString !== null ? JSON.parse(reminderListString) : []
 
     //test
     console.dir(reminderList)
@@ -102,6 +102,14 @@ class ReminderDetailClass extends React.Component {
       reminderTitle: '사야할 것들',
       reminderList
     }
+  }
+
+  // 새로운 미리알림 버튼 클릭 이벤트 함수
+  fnAddNewReminder = () => {
+    console.log('fnAddNewReminder:::')
+    // TODO: 
+    // 1. empty row 생성
+    // 2. default 커서
   }
 
   render() {
@@ -179,7 +187,7 @@ class ReminderDetailClass extends React.Component {
           {/* end: 미리알림 목록 loop */}
         </div>
         {/* bottom */}
-        <div className="bottom" className={classes.bottomStyles}>
+        <div className="bottom" className={classes.bottomStyles} onClick={this.fnAddNewReminder}>
           {/* TODO: 새로운 미리 알림 버튼 */}
           <AddCircleIcon className={classes.addCircleIconStyle} />
           <label className={classes.addButtonLabelStyles}>새로운 미리 알림</label>
