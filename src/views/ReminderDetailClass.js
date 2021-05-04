@@ -11,7 +11,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle'
 import Checkbox from '@material-ui/core/Checkbox';
 import CircleChecked from '@material-ui/icons/CheckCircleOutline';
 import CircleUnchecked from '@material-ui/icons/RadioButtonUnchecked';
-import TextField from '@material-ui/core/TextField'
+// import TextField from '@material-ui/core/TextField'
 import InputBase from '@material-ui/core/InputBase'
 
 
@@ -85,15 +85,10 @@ class ReminderDetailClass extends React.Component {
 
   constructor(props) {
 
-    //test
-    // console.log('constructor:::'+props)
-
     super(props)
 
-    //test
-    // localStorage.setItem('reminderList', JSON.stringify([{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: false, text: '애플워치' },{ checked: true, text: '애플펜슬 2세대' }]))
-
     let reminderListString = localStorage.getItem('reminderList')
+
     let reminderList = reminderListString !== null ? JSON.parse(reminderListString) : []
 
     // this.state는 constructor 함수 안에서만 사용 가능하다.
@@ -110,7 +105,7 @@ class ReminderDetailClass extends React.Component {
     let reminderList = this.state.reminderList === undefined || this.state.reminderList.length == 0 ? [] : this.state.reminderList
 
     // 2. empty list를 추가한 reminderList
-    reminderList.push({ text: '', checked: false, focus: true })
+    reminderList.push({ text: '', checked: false, focus: false })
 
     this.setState({
       reminderList
@@ -118,31 +113,16 @@ class ReminderDetailClass extends React.Component {
   }
 
   // 미리알림 input blur 이벤트 함수
-  fnBlurOnInput = (e) => {
-    
-    // TODO: 대상 row의 입력값(checked, text, focus(false))을 state의 reminderList에 저장해야 한다.(reminderList에서 대상의 index 위치에)
+  fnBlurOnInput = (e, index) => {
 
-    //test
-    // console.log('onBlur:::'+e.target.value)
-    console.log('onBlur:::'+JSON.stringify(this.state.reminderList))
-    /* let checked = ''
-    let text = e.target.value
-
-    let previousReminderList = this.state.reminderList
-    let nextReminderList = ''
-    this.setState(reminderList) */
-
-    
-
-    // TODO: 
-    //this.setState({reminderList: [{ checked: false, text: '유툽 마이크' },{ checked: false, text: '아이패드 매직 키보드' },{ checked: true, text: '애플펜슬 2세대' }]})
-
-
+    // 입력한 index위치의 미리알림 데이터를 reminderList의 index 데이터에 업데이트
+    if(e.target.value.trim() !== '') {
+      this.state.reminderList[index].text = e.target.value.trim()
+      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
+    }
   }
 
   render() {
-    //test
-    // console.log('render:::')
 
     const { reminderTitle, reminderList } = this.state
     const {classes} =this.props
@@ -162,7 +142,7 @@ class ReminderDetailClass extends React.Component {
             <metadata>
               <sfw  xmlns="&ns_sfw;">
                 <slices></slices>
-                <sliceSourceBounds  width="505" height="984" bottomleftorigin="true" x="0" y="-120"></sliceSourceBounds>
+                <sliceSourceBounds width="505" height="984" bottomleftorigin="true" x="0" y="-120"></sliceSourceBounds>
               </sfw>
             </metadata>
             <g>
@@ -215,7 +195,7 @@ class ReminderDetailClass extends React.Component {
                     className={classes.rowTextStyles}
                     defaultValue={item.text}
                     inputProps={{ 'aria-label': 'naked' }}
-                    onBlur={this.fnBlurOnInput}
+                    onBlur={e => this.fnBlurOnInput(e, index)}
                   />
                 </label>
                 {/* real */}
@@ -226,7 +206,7 @@ class ReminderDetailClass extends React.Component {
         </div>
         {/* bottom */}
         <div className="bottom" className={classes.bottomStyles} onClick={this.fnAddNewReminder}>
-          {/* TODO: 새로운 미리 알림 버튼 */}
+          {/* 새로운 미리 알림 버튼 */}
           <AddCircleIcon className={classes.addCircleIconStyle} />
           <label className={classes.addButtonLabelStyles}>새로운 미리 알림</label>
         </div>
