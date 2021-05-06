@@ -98,8 +98,8 @@ class ReminderDetailClass extends React.Component {
     }
   }
 
-  // 새로운 미리알림 버튼 클릭 이벤트 함수
-  fnAddNewReminder = () => {
+  // reminderList localStorage에 빈 객체 추가(새로 입력될 정보)
+  fnAddEmptyReminderToStorage = () => {
 
     // 1. 기존 reminderList
     let reminderList = this.state.reminderList === undefined || this.state.reminderList.length == 0 ? [] : this.state.reminderList
@@ -112,13 +112,67 @@ class ReminderDetailClass extends React.Component {
     })
   }
 
+  // reminderList localStorage에 데이터 객체 추가(새로 입력한 정보)
+  fnReplaceReminderOnStorage = ({reminderIndex, reminderText}) => {
+
+    this.state.reminderList[reminderIndex].text = reminderText
+    // localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
+  }
+
+  // reminderList localStorage에 데이터 제거
+  fnRemoveReminderOnStorage = ({reminderIndex}) => {
+
+    if(this.state.reminderList[reminderIndex] !== undefined) {
+
+      let tempReminderList = [...this.state.reminderList]
+      tempReminderList.splice(reminderIndex, 1)
+      this.state.reminderList = tempReminderList
+      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
+
+      //test
+      console.log('remove??? ===> '+JSON.stringify(this.state.reminderList))
+
+      /* this.state.reminderList.splice(reminderIndex, 1)
+
+      //test
+      console.log('remove??? ===> '+JSON.stringify(this.state.reminderList))
+
+      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList)) */
+    }
+  }
+
+  // 새로운 미리알림 버튼 클릭 이벤트 함수
+  fnAddNewReminder = () => {
+
+    this.fnAddEmptyReminderToStorage()
+  }
+
   // 미리알림 input blur 이벤트 함수
   fnBlurOnInput = (e, index) => {
 
     // 입력한 index위치의 미리알림 데이터를 reminderList의 index 데이터에 업데이트
     if(e.target.value.trim() !== '') {
-      this.state.reminderList[index].text = e.target.value.trim()
-      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
+
+      let args = {
+        reminderIndex: index,
+        reminderText: e.target.value.trim()
+      }
+      this.fnReplaceReminderOnStorage(args)
+    } else {
+
+      //test
+      console.log('e.target.value.trim() ===> '+e.target.value.trim() + '\nindex ===> '+ index)
+
+      this.fnRemoveReminderOnStorage({ reminderIndex: index })
+    }
+  }
+
+  // form enter 이벤트 함수
+  fnOnSubmit = (e) => {
+
+    if(e.keyCode === 13 || e.which === 13) {
+
+      this.fnAddEmptyReminderToStorage()
     }
   }
 
@@ -177,7 +231,7 @@ class ReminderDetailClass extends React.Component {
     </div>
     {/* middle */}
     <div className="middle">
-      <form noValidate autoComplete="off">
+      <form noValidate autoComplete="off" onSubmit={e => e.preventDefault() }>
         <div className="rowWrapper">
           {/* start: 미리알림 목록 loop */}
           {reminderList.map((item, index) => {
@@ -196,6 +250,7 @@ class ReminderDetailClass extends React.Component {
                     defaultValue={item.text}
                     inputProps={{ 'aria-label': 'naked' }}
                     onBlur={e => this.fnBlurOnInput(e, index)}
+                    onKeyPress={this.fnOnSubmit}
                   />
                 </label>
                 {/* real */}
@@ -231,8 +286,11 @@ class ReminderDetailClass extends React.Component {
   }
 
   componentDidUpdate() {
+
     //test
-    console.log('componentDidUpdate:::')
+    console.log('componentDidUpdate ===> ' + JSON.stringify(this.state.reminderList))
+
+    localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
   }
 
   componentWillUnmount() {
