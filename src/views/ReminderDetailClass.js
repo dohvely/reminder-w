@@ -122,22 +122,18 @@ class ReminderDetailClass extends React.Component {
   // reminderList localStorage에 데이터 제거
   fnRemoveReminderOnStorage = ({reminderIndex}) => {
 
+    console.log('fnRemoveReminderOnStorage ===> '+reminderIndex)
+
     if(this.state.reminderList[reminderIndex] !== undefined) {
 
       let tempReminderList = [...this.state.reminderList]
       tempReminderList.splice(reminderIndex, 1)
-      this.state.reminderList = tempReminderList
-      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
 
-      //test
-      console.log('remove??? ===> '+JSON.stringify(this.state.reminderList))
-
-      /* this.state.reminderList.splice(reminderIndex, 1)
-
-      //test
-      console.log('remove??? ===> '+JSON.stringify(this.state.reminderList))
-
-      localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList)) */
+      // this.state.reminderList = tempReminderList
+      this.setState({
+        reminderList: tempReminderList
+      })
+      localStorage.setItem('reminderList', JSON.stringify(tempReminderList))
     }
   }
 
@@ -150,9 +146,9 @@ class ReminderDetailClass extends React.Component {
   // 미리알림 input blur 이벤트 함수
   fnBlurOnInput = (e, index) => {
 
-    // 입력한 index위치의 미리알림 데이터를 reminderList의 index 데이터에 업데이트
     if(e.target.value.trim() !== '') {
-
+      
+      // 입력한 index위치의 미리알림 데이터를 reminderList의 index 데이터에 업데이트
       let args = {
         reminderIndex: index,
         reminderText: e.target.value.trim()
@@ -160,9 +156,7 @@ class ReminderDetailClass extends React.Component {
       this.fnReplaceReminderOnStorage(args)
     } else {
 
-      //test
-      console.log('e.target.value.trim() ===> '+e.target.value.trim() + '\nindex ===> '+ index)
-
+      // 아무 입력을 하지 않았다면 제거
       this.fnRemoveReminderOnStorage({ reminderIndex: index })
     }
   }
@@ -176,6 +170,10 @@ class ReminderDetailClass extends React.Component {
     }
   }
 
+  /**
+   * React LifeCycle에서 동작
+   * state 변경이 일어났을때에도 동작
+   */
   render() {
 
     const { reminderTitle, reminderList } = this.state
