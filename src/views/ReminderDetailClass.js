@@ -102,7 +102,7 @@ class ReminderDetailClass extends React.Component {
   fnAddEmptyReminderToStorage = () => {
 
     // 1. 기존 reminderList
-    let reminderList = this.state.reminderList === undefined || this.state.reminderList.length == 0 ? [] : this.state.reminderList
+    let reminderList = this.state.reminderList === undefined || this.state.reminderList.length === 0 ? [] : this.state.reminderList
 
     // 2. empty list를 추가한 reminderList
     reminderList.push({ text: '', checked: false, focus: false })
@@ -115,8 +115,13 @@ class ReminderDetailClass extends React.Component {
   // reminderList localStorage에 데이터 객체 추가(새로 입력한 정보)
   fnReplaceReminderOnStorage = ({reminderIndex, reminderText}) => {
 
-    this.state.reminderList[reminderIndex].text = reminderText
-    // localStorage.setItem('reminderList', JSON.stringify(this.state.reminderList))
+    // state를 직접 업데이트하면 경고 발생된다. (ex. this.state.reminderList[reminderIndex].text = reminderText)
+    // setState를 활용하여 업데이트하도록 한다.
+    let updateReminderList = [...this.state.reminderList]
+    updateReminderList[reminderIndex].text = reminderText
+    this.setState({
+      reminderList: updateReminderList
+    })
   }
 
   // reminderList localStorage에 데이터 제거
@@ -233,7 +238,7 @@ class ReminderDetailClass extends React.Component {
         <div className="rowWrapper">
           {/* start: 미리알림 목록 loop */}
           {reminderList.map((item, index) => {
-            return <div className="row" className={classes.rowStyles} key={index}>
+            return <div className={'row '+classes.rowStyles} key={index}>
                 <Checkbox
                   id="chk0"
                   icon={<CircleUnchecked />}
@@ -258,7 +263,7 @@ class ReminderDetailClass extends React.Component {
           {/* end: 미리알림 목록 loop */}
         </div>
         {/* bottom */}
-        <div className="bottom" className={classes.bottomStyles} onClick={this.fnAddNewReminder}>
+        <div className={'bottom '+classes.bottomStyles} onClick={this.fnAddNewReminder}>
           {/* 새로운 미리 알림 버튼 */}
           <AddCircleIcon className={classes.addCircleIconStyle} />
           <label className={classes.addButtonLabelStyles}>새로운 미리 알림</label>
