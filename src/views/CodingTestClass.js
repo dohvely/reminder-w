@@ -1,11 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const styleClasses = {
-  fontWhite: {
-    color: "#fff"
-  }
-}
 
 /**
  * React 클래스형
@@ -40,8 +35,13 @@ class CodingTestClass extends React.Component {
 
     // const { reminderTitle, reminderList } = this.state
     // const {classes} = this.props
+    const styleClasses = {
+      fontWhite: {
+        color: "#fff"
+      }
+    }
 
-    return <section><span className={styleClasses.fontWhite}>코딩테스트</span></section>
+    return <section><span style={{ color: "#fff" }}>코딩테스트</span></section>
   }
 
 }
