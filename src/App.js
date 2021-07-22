@@ -3,6 +3,7 @@ import { HashRouter, Route } from 'react-router-dom'
 import MainBoard from './views/MainBoard'
 // import ReminderDetail from './views/ReminderDetail'
 import ReminderDetailClass from './views/ReminderDetailClass'
+import CodingTestClass from './views/CodingTestClass'
 import './App.css';
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
       <Route path="/" exact component={MainBoard}></Route>
       {/* 미리알림 상세 화면 */}
       <Route path="/detail" exact={true} component={ReminderDetailClass}></Route>
+      {/* 코딩테스트!!! */}
+      <Route path="/cotest" exact={true} component={CodingTestClass}></Route>
     </HashRouter>
   )
   /* return (
